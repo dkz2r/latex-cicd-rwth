@@ -54,7 +54,7 @@ use a different docker image:
 build-job:       # This job runs in the build stage, which runs first.
   stage: build
   image:
-    name: alpine/git:latest # Use a simple git comtainer using alpine linux
+    name: alpine/git:latest # Use a simple git container using alpine linux
     entrypoint: [""] # Override the default entrypoint to allow us to run arbitrary commands
   script:
     - echo "Compiling the code..."
@@ -128,7 +128,7 @@ during the build process:
 
 ### Artifacts
 
-Ok, so the command to build the LaTeX document ran sucessfully, but how do we get the generated PDF
+Ok, so the command to build the LaTeX document ran successfully, but how do we get the generated PDF
 file somewhere we can look at it?
 
 We can use the "artifacts" feature of CI/CD to specify that we want to save the generated PDF file
@@ -151,14 +151,218 @@ build-job:       # This job runs in the build stage, which runs first.
 ```
 
 This tells CI/CD that we specifically want to save the `main.pdf` file as an artifact of this job.
-After this job runs, you should be able to see a new section in the job
+After this job runs, you should be able to see a new section in the job details page called
+"Job artifacts":
+
+![](fig/03-build-and-deploy/job-details-artifacts.png){alt="Artifacts section in CI/CD job details"}
+
+Clicking on the "Browse" button will show us a list of files that the job saved as artifacts. Since
+we specifically told it in the `.gitlab-ci.yml` file to only save the `main.pdf` file, that's the
+only file that will be listed here. Clicking on the file will let us preview it in the browser,
+or download it to our computer.
+
+::: callout
+
+We can preview this file because it GitLab has a built-in PDF viewer. If we were to save a
+different type of file as an artifact, we might not be able to preview, but would only be able to
+download it.
+
+:::
+
+### Pages
+
+While it's nice that we can download the generated PDF file, it would be even nicer if we could
+send a url to someone so that they could view our pdf without having to log into GitLab and view
+a specific job. We can do this with the "pages" feature of GitLab CI/CD, which allows us to deploy
+static files to a public URL.
+
+We need to update a couple of settings to make this easier for us. First, we need to tell GitLab
+that the Pages feature is for everyone, not just the project owner. Navigate to the Settings >
+General page in the sidebar, and scroll down to the "Visibility, project features, permissions"
+section. Under the "Pages" feature, make sure the toggle is turned on and that "Everyone with
+access" is selected:
+
+![](fig/03-build-and-deploy/pages-settings.png){alt="GitLab Pages settings"}
+
+Next, let's update our `.gitlab-ci.yml` file to deploy the generated PDF file to GitLab Pages.
+GitLab CI/CD has a special job for deploying to Pages, which is called `pages`. We can add this job
+to our pipeline like this:
+
+```yaml
+pages:
+  stage: deploy
+  script:
+    - echo "Deploying to GitLab Pages..."
+    - mkdir -p public # Create the public directory if it doesn't exist
+    - mv main.pdf public/ # Move the generated PDF file to the public directory
+  artifacts:
+    paths:
+      - public # Save the public directory as an artifact so that it can be deployed to Pages
+```
+
+Much of this we've seen before, but there are a couple of things to take note of here.
+
+1. The job **must** be called `pages` in order for GitLab to recognize it as a Pages deployment job
+   (the stage name can be anything, but the job name must be `pages`).
+2. We need to move the generated PDF file to a directory called `public`, as this is the directory
+   that GitLab Pages expects to serve files from. (We also need to ensure that this directory
+   exists, which is why we have the `mkdir -p public` command).
+3. Finally, we need to save the `public` directory as an artifact of this job.
+
+After we commit this change, the pipeline will run. You might notice however that there's a job in
+our pipeline that we didn't write called "pages:deploy". This is a special job that GitLab
+automatically creates as a result of having a job called `pages` in our pipeline. This job is
+responsible for taking the artifacts from the `pages` job and deploying them to GitLab Pages.
+
+Next we want to view our page. In the sidebar, navigate to "Deploy" > "Pages":
+
+![](fig/03-build-and-deploy/deploy-pages-settings.png){alt="GitLab Pages settings"}
+
+This page gives us an overview of our pages deployment click on the "Visit website" button and...
+
+![](fig/03-build-and-deploy/gitlab-404.png){alt="404 error when visiting GitLab Pages URL"}
+
+What's going on here? Why are we getting a 404 error when we try to visit our page? GitLab Pages is
+serving the public folder - if we had a file in this directory called "index.html", then this would
+be used as the homepage of our site. However, since the only file in our public directory is
+`main.pdf`, we have to specify this in the url. Add `main.pdf` to the end of the url and try
+visiting it again.
+
+::: callout
+
+Depending on your GitLab deployment, the url for your pages site might have some extra letters and
+numbers in it. This is one way of ensuring that the url is unique for each pipeline run, but
+ideally we want just one url. In the Deploy > Pages settings page, there is a tab called "Domains
+& settings". In this tab there is a checkbox called "Use unique domain". If you uncheck this box,
+your pages site will have a fixed url that doesn't change with each pipeline run.
+
+:::
+
+::::::::::::::::::::::::::::::::::::: challenge
+
+## Challenge 1: Update the LaTeX document
+
+Update the `main.tex` file with some additional text in between the `\begin{document}` and
+`\end{document}` tags, e.g. add a new paragraph with some text. If you know some LaTeX, you can
+also try adding some additional formatting, e.g. make some text bold or italic, or add a section
+heading.
+
+Commit the changes to the file and let the pipeline run. Refresh the page for your GitLab Pages
+site after the pipeline is finished running. Did the changes you made to the LaTeX document show up
+on the page?
+
+:::::::::::::::::::::::: solution
+
+You may have to wait a minute after the pipeline finishes running for the changes to show up. If
+you refresh the page after a minute and still don't see the changes, try forcing a refresh on the
+page. This will vary depending on your browser:
+
+- Chrome: `Ctrl + Shift + R` on Windows or `Cmd + Shift + R` on Mac
+- Firefox: `Ctrl + F5` on Windows or `Cmd + Shift + R` on Mac
+- Safari: `Cmd + Option + R` on Mac
+- Edge: `Ctrl + Shift + R` on Windows or `Cmd + Shift + R` on Mac
+
+:::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::
+
+
+::::::::::::::::::::::::::::::::::::: challenge
+
+## Challenge 2: Add an additional file to the public directory
+
+We also have in our repository a README.md file. This file is not currently being deployed to
+our Pages site, but we can easily change that by adding a command to our `pages` job.
+
+Update the `pages` job in your `.gitlab-ci.yml` so that the `README.md` file is also deployed to
+the pages site.
+
+::: hint
+
+You will need to move the `README.md` file to the `public` directory, just like we did with the
+`main.pdf` file.
+
+:::
+
+:::::::::::::::::::::::: solution
+
+```yaml
+pages:
+  stage: deploy
+  script:
+    - echo "Deploying to GitLab Pages..."
+    - mkdir -p public # Create the public directory if it doesn't exist
+    - mv main.pdf public/ # Move the generated PDF file to the public directory
+    - mv README.md public/ # Move the README.md file to the public directory
+  artifacts:
+    paths:
+      - public # Save the public directory as an artifact so that it can be deployed to Pages
+```
+
+:::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::: challenge
+
+## Challenge 3: Add a landing page to the Pages site
+
+Earlier we found that when we navigated to the url for our Pages site, we got a 404 error because
+there was no `index.html` file in the `public` directory. We can fix this by adding an `index.html`
+file when we build our Pages site.
+
+Here is a very simple `index.html` file that you can use:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My LaTeX Document</title>
+</head>
+<body>
+    <h1>Links</h1>
+    <ul>
+        <li><a href="main.pdf">View the PDF document</a></li>
+        <li><a href="README.md">View the README file</a></li>
+    </ul>
+</body>
+</html>
+```
+
+:::::::::::::::::::::::: solution
+
+Save the above HTML code in a file called `index.html` in the root of your repository. Then, update
+the `pages` job in your `.gitlab-ci.yml` file to move this `index.html` file to the `public`
+directory, just like we did with the `main.pdf` and `README.md` files:
+
+```yaml
+pages:
+  stage: deploy
+  script:
+    - echo "Deploying to GitLab Pages..."
+    - mkdir -p public # Create the public directory if it doesn't exist
+    - mv main.pdf public/ # Move the generated PDF file to the public directory
+    - mv README.md public/ # Move the README.md file to the public directory
+    - mv index.html public/ # Move the index.html file to the public directory
+  artifacts:
+    paths:
+      - public # Save the public directory as an artifact so that it can be deployed to Pages
+```
+
+:::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: keypoints
 
-- Use `.md` files for episodes when you want static content
-- Use `.Rmd` files for episodes when you need to generate output
-- Run `sandpaper::check_lesson()` to identify any issues with your lesson
-- Run `sandpaper::build_lesson()` to preview your lesson locally
+- We can use CI/CD to automate the process of building and deploying a LaTeX document.
+- Each job in the CI/CD pipeline runs in a Docker container, and we can specify which Docker image
+  to use for each job.
+- We can use the "artifacts" feature of CI/CD to save files generated by a job and make them
+  available for download.
+- We can use the "pages" feature of GitLab CI/CD to deploy static files to a public URL.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
