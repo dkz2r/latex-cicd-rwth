@@ -457,7 +457,7 @@ your project.</p>
 <button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler1" aria-expanded="false" aria-controls="collapseSpoiler1">
   <h3 class="accordion-header" id="headingSpoiler1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> Show details </h3>
 </button>
-<div id="collapseSpoiler1" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler1" aria-labelledby="headingSpoiler1">
+<div id="collapseSpoiler1" class="accordion-collapse collapse" aria-labelledby="headingSpoiler1" data-bs-parent="#accordionSpoiler1">
 <div class="accordion-body">
 <p>In case the “Configure Pipeline” button does not work for you, you
 can also create a new file in the root directory of your project called
@@ -754,7 +754,7 @@ stage of our pipeline. This job should be called
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb8">
 <h3 class="code-label">YAML<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -801,7 +801,7 @@ in order for this job to run successfully?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>We must add the <code>validate</code> stage to our
 <code>stages</code> section at the top of the file:</p>
@@ -853,7 +853,7 @@ CI/CD Predefined Variables</a> and see what happens.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <p><code>ls -a</code> will print out all files in the current directory,
 including hidden files. Your output might look something like this:</p>
@@ -914,7 +914,7 @@ installed in the runner</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
   <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
 <div class="accordion-body">
 <p>The pipeline will fail with an error message that looks something
 like this:</p>
@@ -958,7 +958,7 @@ any links that you are not going to use.
 </div>
 </section></section><section id="aio-03-build-and-deploy"><p>Content from <a href="03-build-and-deploy.html">Using CI/CD to Build and Deploy a LaTeX Document</a></p>
 <hr>
-<p>Last updated on 2026-03-02 |
+<p>Last updated on 2026-03-03 |
 
         <a href="https://github.com/dkz2r/latex-cicd-rwth/edit/main/episodes/03-build-and-deploy.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 12 minutes</p>
@@ -1042,7 +1042,7 @@ job, we want to use a different docker image:</p>
 <pre class="sourceCode yaml" tabindex="0"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">build-job</span><span class="kw">:</span><span class="co">       # This job runs in the build stage, which runs first.</span></span>
 <span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="at">  </span><span class="fu">stage</span><span class="kw">:</span><span class="at"> build</span></span>
 <span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="at">  </span><span class="fu">image</span><span class="kw">:</span></span>
-<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="at">    </span><span class="fu">name</span><span class="kw">:</span><span class="at"> alpine/git:latest</span><span class="co"> # Use a simple git comtainer using alpine linux</span></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="at">    </span><span class="fu">name</span><span class="kw">:</span><span class="at"> alpine/git:latest</span><span class="co"> # Use a simple git container using alpine linux</span></span>
 <span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="at">    </span><span class="fu">entrypoint</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">""</span><span class="kw">]</span><span class="co"> # Override the default entrypoint to allow us to run arbitrary commands</span></span>
 <span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="at">  </span><span class="fu">script</span><span class="kw">:</span></span>
 <span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> echo "Compiling the code..."</span></span>
@@ -1128,7 +1128,7 @@ process:</p>
 <figure><img src="../fig/03-build-and-deploy/lualatex-output.png" alt="Output of lualatex command in CI/CD job" class="figure mx-auto d-block"></figure><div class="section level3">
 <h3 id="artifacts">Artifacts<a class="anchor" aria-label="anchor" href="#artifacts"></a>
 </h3>
-<p>Ok, so the command to build the LaTeX document ran sucessfully, but
+<p>Ok, so the command to build the LaTeX document ran successfully, but
 how do we get the generated PDF file somewhere we can look at it?</p>
 <p>We can use the “artifacts” feature of CI/CD to specify that we want
 to save the generated PDF file as an artifact of the job. This means
@@ -1153,7 +1153,276 @@ file like this:</p>
 </div>
 <p>This tells CI/CD that we specifically want to save the
 <code>main.pdf</code> file as an artifact of this job. After this job
-runs, you should be able to see a new section in the job</p>
+runs, you should be able to see a new section in the job details page
+called “Job artifacts”:</p>
+<figure><img src="../fig/03-build-and-deploy/job-details-artifacts.png" alt="Artifacts section in CI/CD job details" class="figure mx-auto d-block"></figure><p>Clicking on the “Browse” button will show us a list of files that the
+job saved as artifacts. Since we specifically told it in the
+<code>.gitlab-ci.yml</code> file to only save the <code>main.pdf</code>
+file, that’s the only file that will be listed here. Clicking on the
+file will let us preview it in the browser, or download it to our
+computer.</p>
+<div id="callout4" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<span class="callout-header">Callout</span>
+<div class="callout-inner">
+<div class="callout-content">
+<p>We can preview this file because it GitLab has a built-in PDF viewer.
+If we were to save a different type of file as an artifact, we might not
+be able to preview, but would only be able to download it.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="section level3">
+<h3 id="pages">Pages<a class="anchor" aria-label="anchor" href="#pages"></a>
+</h3>
+<p>While it’s nice that we can download the generated PDF file, it would
+be even nicer if we could send a url to someone so that they could view
+our pdf without having to log into GitLab and view a specific job. We
+can do this with the “pages” feature of GitLab CI/CD, which allows us to
+deploy static files to a public URL.</p>
+<p>We need to update a couple of settings to make this easier for us.
+First, we need to tell GitLab that the Pages feature is for everyone,
+not just the project owner. Navigate to the Settings &gt; General page
+in the sidebar, and scroll down to the “Visibility, project features,
+permissions” section. Under the “Pages” feature, make sure the toggle is
+turned on and that “Everyone with access” is selected:</p>
+<figure><img src="../fig/03-build-and-deploy/pages-settings.png" alt="GitLab Pages settings" class="figure mx-auto d-block"></figure><p>Next, let’s update our <code>.gitlab-ci.yml</code> file to deploy the
+generated PDF file to GitLab Pages. GitLab CI/CD has a special job for
+deploying to Pages, which is called <code>pages</code>. We can add this
+job to our pipeline like this:</p>
+<div class="codewrapper sourceCode" id="cb5">
+<h3 class="code-label">YAML<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode yaml" tabindex="0"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="fu">pages</span><span class="kw">:</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="at">  </span><span class="fu">stage</span><span class="kw">:</span><span class="at"> deploy</span></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="at">  </span><span class="fu">script</span><span class="kw">:</span></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> echo "Deploying to GitLab Pages..."</span></span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> mkdir -p public</span><span class="co"> # Create the public directory if it doesn't exist</span></span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> mv main.pdf public/</span><span class="co"> # Move the generated PDF file to the public directory</span></span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a><span class="at">  </span><span class="fu">artifacts</span><span class="kw">:</span></span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a><span class="at">    </span><span class="fu">paths</span><span class="kw">:</span></span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> public</span><span class="co"> # Save the public directory as an artifact so that it can be deployed to Pages</span></span></code></pre>
+</div>
+<p>Much of this we’ve seen before, but there are a couple of things to
+take note of here.</p>
+<ol style="list-style-type: decimal">
+<li>The job <strong>must</strong> be called <code>pages</code> in order
+for GitLab to recognize it as a Pages deployment job (the stage name can
+be anything, but the job name must be <code>pages</code>).</li>
+<li>We need to move the generated PDF file to a directory called
+<code>public</code>, as this is the directory that GitLab Pages expects
+to serve files from. (We also need to ensure that this directory exists,
+which is why we have the <code>mkdir -p public</code> command).</li>
+<li>Finally, we need to save the <code>public</code> directory as an
+artifact of this job.</li>
+</ol>
+<p>After we commit this change, the pipeline will run. You might notice
+however that there’s a job in our pipeline that we didn’t write called
+“pages:deploy”. This is a special job that GitLab automatically creates
+as a result of having a job called <code>pages</code> in our pipeline.
+This job is responsible for taking the artifacts from the
+<code>pages</code> job and deploying them to GitLab Pages.</p>
+<p>Next we want to view our page. In the sidebar, navigate to “Deploy”
+&gt; “Pages”:</p>
+<figure><img src="../fig/03-build-and-deploy/deploy-pages-settings.png" alt="GitLab Pages settings" class="figure mx-auto d-block"></figure><p>This page gives us an overview of our pages deployment click on the
+“Visit website” button and…</p>
+<figure><img src="../fig/03-build-and-deploy/gitlab-404.png" alt="404 error when visiting GitLab Pages URL" class="figure mx-auto d-block"></figure><p>What’s going on here? Why are we getting a 404 error when we try to
+visit our page? GitLab Pages is serving the public folder - if we had a
+file in this directory called “index.html”, then this would be used as
+the homepage of our site. However, since the only file in our public
+directory is <code>main.pdf</code>, we have to specify this in the url.
+Add <code>main.pdf</code> to the end of the url and try visiting it
+again.</p>
+<div id="callout5" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<span class="callout-header">Callout</span>
+<div class="callout-inner">
+<div class="callout-content">
+<p>Depending on your GitLab deployment, the url for your pages site
+might have some extra letters and numbers in it. This is one way of
+ensuring that the url is unique for each pipeline run, but ideally we
+want just one url. In the Deploy &gt; Pages settings page, there is a
+tab called “Domains &amp; settings”. In this tab there is a checkbox
+called “Use unique domain”. If you uncheck this box, your pages site
+will have a fixed url that doesn’t change with each pipeline run.</p>
+</div>
+</div>
+</div>
+<div id="challenge-1-update-the-latex-document" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<span class="callout-header">Challenge</span>
+<div id="challenge-1-update-the-latex-document" class="callout-inner">
+<h3 class="callout-title">Challenge 1: Update the LaTeX document</h3>
+<div class="callout-content">
+<p>Update the <code>main.tex</code> file with some additional text in
+between the <code>\begin{document}</code> and
+<code>\end{document}</code> tags, e.g. add a new paragraph with some
+text. If you know some LaTeX, you can also try adding some additional
+formatting, e.g. make some text bold or italic, or add a section
+heading.</p>
+<p>Commit the changes to the file and let the pipeline run. Refresh the
+page for your GitLab Pages site after the pipeline is finished running.
+Did the changes you made to the LaTeX document show up on the page?</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div class="accordion-body">
+<p>You may have to wait a minute after the pipeline finishes running for
+the changes to show up. If you refresh the page after a minute and still
+don’t see the changes, try forcing a refresh on the page. This will vary
+depending on your browser:</p>
+<ul>
+<li>Chrome: <code>Ctrl + Shift + R</code> on Windows or
+<code>Cmd + Shift + R</code> on Mac</li>
+<li>Firefox: <code>Ctrl + F5</code> on Windows or
+<code>Cmd + Shift + R</code> on Mac</li>
+<li>Safari: <code>Cmd + Option + R</code> on Mac</li>
+<li>Edge: <code>Ctrl + Shift + R</code> on Windows or
+<code>Cmd + Shift + R</code> on Mac</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="challenge-2-add-an-additional-file-to-the-public-directory" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<span class="callout-header">Challenge</span>
+<div id="challenge-2-add-an-additional-file-to-the-public-directory" class="callout-inner">
+<h3 class="callout-title">Challenge 2: Add an additional file to the
+public directory</h3>
+<div class="callout-content">
+<p>We also have in our repository a README.md file. This file is not
+currently being deployed to our Pages site, but we can easily change
+that by adding a command to our <code>pages</code> job.</p>
+<p>Update the <code>pages</code> job in your <code>.gitlab-ci.yml</code>
+so that the <code>README.md</code> file is also deployed to the pages
+site.</p>
+</div>
+</div>
+</div>
+<div id="accordionHint1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint1" aria-expanded="false" aria-controls="collapseHint1">
+  <h4 class="accordion-header" id="headingHint1"> Give me a hint </h4>
+</button>
+<div id="collapseHint1" class="accordion-collapse collapse" aria-labelledby="headingHint1" data-bs-parent="#accordionHint1">
+<div class="accordion-body">
+<p>You will need to move the <code>README.md</code> file to the
+<code>public</code> directory, just like we did with the
+<code>main.pdf</code> file.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
+  <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
+</button>
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div class="accordion-body">
+<div class="codewrapper sourceCode" id="cb6">
+<h3 class="code-label">YAML<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode yaml" tabindex="0"><code class="sourceCode yaml"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="fu">pages</span><span class="kw">:</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="at">  </span><span class="fu">stage</span><span class="kw">:</span><span class="at"> deploy</span></span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="at">  </span><span class="fu">script</span><span class="kw">:</span></span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> echo "Deploying to GitLab Pages..."</span></span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> mkdir -p public</span><span class="co"> # Create the public directory if it doesn't exist</span></span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> mv main.pdf public/</span><span class="co"> # Move the generated PDF file to the public directory</span></span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> mv README.md public/</span><span class="co"> # Move the README.md file to the public directory</span></span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a><span class="at">  </span><span class="fu">artifacts</span><span class="kw">:</span></span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a><span class="at">    </span><span class="fu">paths</span><span class="kw">:</span></span>
+<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> public</span><span class="co"> # Save the public directory as an artifact so that it can be deployed to Pages</span></span></code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="challenge-3-add-a-landing-page-to-the-pages-site" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<span class="callout-header">Challenge</span>
+<div id="challenge-3-add-a-landing-page-to-the-pages-site" class="callout-inner">
+<h3 class="callout-title">Challenge 3: Add a landing page to the Pages
+site</h3>
+<div class="callout-content">
+<p>Earlier we found that when we navigated to the url for our Pages
+site, we got a 404 error because there was no <code>index.html</code>
+file in the <code>public</code> directory. We can fix this by adding an
+<code>index.html</code> file when we build our Pages site.</p>
+<p>Here is a very simple <code>index.html</code> file that you can
+use:</p>
+<div class="codewrapper sourceCode" id="cb7">
+<h3 class="code-label">HTML<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode html" tabindex="0"><code class="sourceCode html"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="dt">&lt;!DOCTYPE</span> html<span class="dt">&gt;</span></span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">html</span><span class="ot"> lang</span><span class="op">=</span><span class="st">"en"</span><span class="dt">&gt;</span></span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">head</span><span class="dt">&gt;</span></span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> charset</span><span class="op">=</span><span class="st">"UTF-8"</span><span class="dt">&gt;</span></span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">"viewport"</span><span class="ot"> content</span><span class="op">=</span><span class="st">"width=device-width, initial-scale=1.0"</span><span class="dt">&gt;</span></span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">title</span><span class="dt">&gt;</span>My LaTeX Document<span class="dt">&lt;/</span><span class="kw">title</span><span class="dt">&gt;</span></span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">head</span><span class="dt">&gt;</span></span>
+<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">body</span><span class="dt">&gt;</span></span>
+<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">h1</span><span class="dt">&gt;</span>Links<span class="dt">&lt;/</span><span class="kw">h1</span><span class="dt">&gt;</span></span>
+<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">ul</span><span class="dt">&gt;</span></span>
+<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a>        <span class="dt">&lt;</span><span class="kw">li</span><span class="dt">&gt;&lt;</span><span class="kw">a</span><span class="ot"> href</span><span class="op">=</span><span class="st">"main.pdf"</span><span class="dt">&gt;</span>View the PDF document<span class="dt">&lt;/</span><span class="kw">a</span><span class="dt">&gt;&lt;/</span><span class="kw">li</span><span class="dt">&gt;</span></span>
+<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a>        <span class="dt">&lt;</span><span class="kw">li</span><span class="dt">&gt;&lt;</span><span class="kw">a</span><span class="ot"> href</span><span class="op">=</span><span class="st">"README.md"</span><span class="dt">&gt;</span>View the README file<span class="dt">&lt;/</span><span class="kw">a</span><span class="dt">&gt;&lt;/</span><span class="kw">li</span><span class="dt">&gt;</span></span>
+<span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a>    <span class="dt">&lt;/</span><span class="kw">ul</span><span class="dt">&gt;</span></span>
+<span id="cb7-14"><a href="#cb7-14" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">body</span><span class="dt">&gt;</span></span>
+<span id="cb7-15"><a href="#cb7-15" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">html</span><span class="dt">&gt;</span></span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div id="accordionSolution3" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
+  <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
+</button>
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div class="accordion-body">
+<p>Save the above HTML code in a file called <code>index.html</code> in
+the root of your repository. Then, update the <code>pages</code> job in
+your <code>.gitlab-ci.yml</code> file to move this
+<code>index.html</code> file to the <code>public</code> directory, just
+like we did with the <code>main.pdf</code> and <code>README.md</code>
+files:</p>
+<div class="codewrapper sourceCode" id="cb8">
+<h3 class="code-label">YAML<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode yaml" tabindex="0"><code class="sourceCode yaml"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="fu">pages</span><span class="kw">:</span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="at">  </span><span class="fu">stage</span><span class="kw">:</span><span class="at"> deploy</span></span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="at">  </span><span class="fu">script</span><span class="kw">:</span></span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> echo "Deploying to GitLab Pages..."</span></span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> mkdir -p public</span><span class="co"> # Create the public directory if it doesn't exist</span></span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> mv main.pdf public/</span><span class="co"> # Move the generated PDF file to the public directory</span></span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> mv README.md public/</span><span class="co"> # Move the README.md file to the public directory</span></span>
+<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> mv index.html public/</span><span class="co"> # Move the index.html file to the public directory</span></span>
+<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a><span class="at">  </span><span class="fu">artifacts</span><span class="kw">:</span></span>
+<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a><span class="at">    </span><span class="fu">paths</span><span class="kw">:</span></span>
+<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> public</span><span class="co"> # Save the public directory as an artifact so that it can be deployed to Pages</span></span></code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -1162,14 +1431,14 @@ runs, you should be able to see a new section in the job</p>
 <div class="callout-inner">
 <div class="callout-content">
 <ul>
-<li>Use <code>.md</code> files for episodes when you want static
-content</li>
-<li>Use <code>.Rmd</code> files for episodes when you need to generate
-output</li>
-<li>Run <code>sandpaper::check_lesson()</code> to identify any issues
-with your lesson</li>
-<li>Run <code>sandpaper::build_lesson()</code> to preview your lesson
-locally</li>
+<li>We can use CI/CD to automate the process of building and deploying a
+LaTeX document.</li>
+<li>Each job in the CI/CD pipeline runs in a Docker container, and we
+can specify which Docker image to use for each job.</li>
+<li>We can use the “artifacts” feature of CI/CD to save files generated
+by a job and make them available for download.</li>
+<li>We can use the “pages” feature of GitLab CI/CD to deploy static
+files to a public URL.</li>
 </ul>
 </div>
 </div>

@@ -354,14 +354,14 @@ locally</li>
 </ul></section><section id="03-build-and-deploy"><h2 class="section-heading"><a href="03-build-and-deploy.html">Using CI/CD to Build and Deploy a LaTeX Document</a></h2>
 <hr class="half-width">
 <ul>
-<li>Use <code>.md</code> files for episodes when you want static
-content</li>
-<li>Use <code>.Rmd</code> files for episodes when you need to generate
-output</li>
-<li>Run <code>sandpaper::check_lesson()</code> to identify any issues
-with your lesson</li>
-<li>Run <code>sandpaper::build_lesson()</code> to preview your lesson
-locally</li>
+<li>We can use CI/CD to automate the process of building and deploying a
+LaTeX document.</li>
+<li>Each job in the CI/CD pipeline runs in a Docker container, and we
+can specify which Docker image to use for each job.</li>
+<li>We can use the “artifacts” feature of CI/CD to save files generated
+by a job and make them available for download.</li>
+<li>We can use the “pages” feature of GitLab CI/CD to deploy static
+files to a public URL.</li>
 </ul></section>
 </div>
     </main>
