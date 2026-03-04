@@ -104,8 +104,13 @@ Hello \LaTeX!
 \end{document}
 ```
 
-Next, we need to tell our CI/CD pipeline to use this image, and to run the command to build our
-LaTeX document:
+We want to use CI/CD to automatically build this LaTeX document into a PDF file, so we'll need to
+use a docker image that contains LaTeX. Searching for "latex" on Docker Hub gives us a few options,
+and for this workshop we'll use the `texlive/texlive` image, which contains the TeX Live
+distribution of LaTeX.
+
+We'll update our CI/CD pipeline to use this image, and to run the command to build our LaTeX
+document:
 
 ```yaml
 build-job:       # This job runs in the build stage, which runs first.
