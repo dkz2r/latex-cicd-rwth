@@ -348,12 +348,12 @@ pages:
   script:
     - echo "Deploying to GitLab Pages..."
     - mkdir -p public # Create the public directory if it doesn't exist
-    - mv main.pdf public/ # Move the generated PDF file to the public directory
-    - mv README.md public/ # Move the README.md file to the public directory
-    - mv index.html public/ # Move the index.html file to the public directory
+    - mv main.pdf public/ # Move the generated PDF file to public
+    - mv README.md public/ # Move the README.md file to public
+    - mv index.html public/ # Move the index.html file to public
   artifacts:
     paths:
-      - public # Save the public directory as an artifact so that it can be deployed to Pages
+      - public # Save the public directory as an artifact
 ```
 
 :::::::::::::::::::::::::::::::::
