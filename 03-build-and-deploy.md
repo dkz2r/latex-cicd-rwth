@@ -104,8 +104,13 @@ Hello \LaTeX!
 \end{document}
 ```
 
-Next, we need to tell our CI/CD pipeline to use this image, and to run the command to build our
-LaTeX document:
+We want to use CI/CD to automatically build this LaTeX document into a PDF file, so we'll need to
+use a docker image that contains LaTeX. Searching for "latex" on Docker Hub gives us a few options,
+and for this workshop we'll use the `texlive/texlive` image, which contains the TeX Live
+distribution of LaTeX.
+
+We'll update our CI/CD pipeline to use this image, and to run the command to build our LaTeX
+document:
 
 ```yaml
 build-job:       # This job runs in the build stage, which runs first.
@@ -343,12 +348,12 @@ pages:
   script:
     - echo "Deploying to GitLab Pages..."
     - mkdir -p public # Create the public directory if it doesn't exist
-    - mv main.pdf public/ # Move the generated PDF file to the public directory
-    - mv README.md public/ # Move the README.md file to the public directory
-    - mv index.html public/ # Move the index.html file to the public directory
+    - mv main.pdf public/ # Move the generated PDF file to public
+    - mv README.md public/ # Move the README.md file to public
+    - mv index.html public/ # Move the index.html file to public
   artifacts:
     paths:
-      - public # Save the public directory as an artifact so that it can be deployed to Pages
+      - public # Save the public directory as an artifact
 ```
 
 :::::::::::::::::::::::::::::::::
