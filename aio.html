@@ -277,6 +277,18 @@
 </div>
 <!--/div.accordion-flush-->
 
+<div class="accordion accordion-flush" id="accordionFlush5">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading5">
+        <a href="04-pandoc.html">4. Pandoc</a>
+    </div>
+<!--/div.accordion-header-->
+
+  </div>
+<!--/div.accordion-item-->
+</div>
+<!--/div.accordion-flush-->
+
                 </div>
               </div>
             </div>
@@ -454,7 +466,7 @@ your project.</p>
 <button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler1" aria-expanded="false" aria-controls="collapseSpoiler1">
   <h3 class="accordion-header" id="headingSpoiler1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> Show details </h3>
 </button>
-<div id="collapseSpoiler1" class="accordion-collapse collapse" aria-labelledby="headingSpoiler1" data-bs-parent="#accordionSpoiler1">
+<div id="collapseSpoiler1" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler1" aria-labelledby="headingSpoiler1">
 <div class="accordion-body">
 <p>In case the “Configure Pipeline” button does not work for you, you
 can also create a new file in the root directory of your project called
@@ -954,7 +966,7 @@ any links that you are not going to use.
 </div>
 </section></section><section id="aio-03-build-and-deploy"><p>Content from <a href="03-build-and-deploy.html">Using CI/CD to Build and Deploy a LaTeX Document</a></p>
 <hr>
-<p>Last updated on 2026-03-03 |
+<p>Last updated on 2026-03-04 |
 
         <a href="https://github.com/dkz2r/latex-cicd-rwth/edit/main/episodes/03-build-and-deploy.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -1099,8 +1111,13 @@ of our repository with the following content:</p>
 <span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>Hello <span class="fu">\LaTeX</span>!</span>
 <span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="kw">\end</span>{<span class="ex">document</span>}</span></code></pre>
 </div>
-<p>Next, we need to tell our CI/CD pipeline to use this image, and to
-run the command to build our LaTeX document:</p>
+<p>We want to use CI/CD to automatically build this LaTeX document into
+a PDF file, so we’ll need to use a docker image that contains LaTeX.
+Searching for “latex” on Docker Hub gives us a few options, and for this
+workshop we’ll use the <code>texlive/texlive</code> image, which
+contains the TeX Live distribution of LaTeX.</p>
+<p>We’ll update our CI/CD pipeline to use this image, and to run the
+command to build our LaTeX document:</p>
 <div class="codewrapper sourceCode" id="cb3">
 <h3 class="code-label">YAML<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -1407,12 +1424,12 @@ files:</p>
 <span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="at">  </span><span class="fu">script</span><span class="kw">:</span></span>
 <span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> echo "Deploying to GitLab Pages..."</span></span>
 <span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> mkdir -p public</span><span class="co"> # Create the public directory if it doesn't exist</span></span>
-<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> mv main.pdf public/</span><span class="co"> # Move the generated PDF file to the public directory</span></span>
-<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> mv README.md public/</span><span class="co"> # Move the README.md file to the public directory</span></span>
-<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> mv index.html public/</span><span class="co"> # Move the index.html file to the public directory</span></span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> mv main.pdf public/</span><span class="co"> # Move the generated PDF file to public</span></span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> mv README.md public/</span><span class="co"> # Move the README.md file to public</span></span>
+<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> mv index.html public/</span><span class="co"> # Move the index.html file to public</span></span>
 <span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a><span class="at">  </span><span class="fu">artifacts</span><span class="kw">:</span></span>
 <span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a><span class="at">    </span><span class="fu">paths</span><span class="kw">:</span></span>
-<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> public</span><span class="co"> # Save the public directory as an artifact so that it can be deployed to Pages</span></span></code></pre>
+<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> public</span><span class="co"> # Save the public directory as an artifact</span></span></code></pre>
 </div>
 </div>
 </div>
@@ -1435,6 +1452,350 @@ by a job and make them available for download.</li>
 <li>We can use the “pages” feature of GitLab CI/CD to deploy static
 files to a public URL.</li>
 </ul>
+</div>
+</div>
+</div>
+<!--
+Place links that you need to refer to multiple times across pages here. Delete
+any links that you are not going to use.
+ -->
+</div>
+</section></section><section id="aio-04-pandoc"><p>Content from <a href="04-pandoc.html">Pandoc</a></p>
+<hr>
+<p>Last updated on 2026-03-04 |
+
+        <a href="https://github.com/dkz2r/latex-cicd-rwth/edit/main/episodes/04-pandoc.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
+<div class="text-end">
+          <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right" data-expand="Expand All Solutions " data-collapse="Collapse All Solutions "> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
+        </div>
+<div class="overview card">
+<h2 class="card-header">Overview</h2>
+<div class="row g-0">
+<div class="col-md-4">
+<div class="card-body">
+<div class="inner">
+<h3 class="card-title">Questions</h3>
+<ul>
+<li>What is Pandoc and how does it relate to Markdown and LaTeX?</li>
+<li>How can we use Pandoc to convert Markdown files into PDF files?</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="col-md-8">
+<div class="card-body">
+<div class="inner bordered">
+<h3 class="card-title">Objectives</h3>
+<ul>
+<li>Use Pandoc to convert Markdown files into different formats</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<section><h2 class="section-heading" id="pandoc">Pandoc<a class="anchor" aria-label="anchor" href="#pandoc"></a>
+</h2>
+<hr class="half-width">
+<p>Pandoc is a “universal document converter” run on the command line to
+convert files from one format to another. It can handle a wide variety
+of input and output formats, including more simple formats like Markdown
+and HTML, as well as more complex formats like PDF and Microsoft Word.
+Depending on the format, pandoc can either convert from, to or both the
+input and output formats.</p>
+<p>For our use case, Pandoc can be used to convert a Markdown file into
+a “LaTeX Beamer” file, which is a LaTeX document class used for creating
+presentations. This allows us to write our presentation in Markdown,
+which is easier to write and read than LaTeX, and then use Pandoc in our
+CI/CD pipeline to convert it into a PDF file that we can share with
+others.</p>
+</section><section><h2 class="section-heading" id="create-a-document-in-markdown">Create a document in Markdown<a class="anchor" aria-label="anchor" href="#create-a-document-in-markdown"></a>
+</h2>
+<hr class="half-width">
+<p>We have our LaTeX document from a previous episode, but wouldn’t it
+be nicer if we could write our document in a simpler format like
+Markdown and then convert it? Let’s start by re-creating our simple
+LaTeX document in Markdown. Create a file called
+<code>my_document.md</code> and add the following content:</p>
+<div class="codewrapper sourceCode" id="cb1">
+<h3 class="code-label">MARKDOWN<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode markdown" tabindex="0"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="an">title:</span><span class="co"> "My Document"</span></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Max Mustermann"</span></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="an">date:</span><span class="co"> "2000-01-01"</span></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>Hello LaTeX!</span></code></pre>
+</div>
+<p>Next let’s create a job that uses Pandoc to convert this Markdown
+file into a PDF. We can use the “build” stage again, since this job is
+independent from our earlier build job that builds our LaTeX document,
+but note two things:</p>
+<ul>
+<li>We are using a different Docker image that contains some additional
+packages and templates called <code>pandoc/extra</code>.</li>
+<li>We need to change the job name to something different than
+<code>build-job</code> since we already have a job with that name.</li>
+</ul>
+<div class="codewrapper sourceCode" id="cb2">
+<h3 class="code-label">YAML<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode yaml" tabindex="0"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">build-job-pandoc</span><span class="kw">:</span><span class="co">       # This job runs in the build stage, which runs first.</span></span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="at">  </span><span class="fu">stage</span><span class="kw">:</span><span class="at"> build</span></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="at">  </span><span class="fu">image</span><span class="kw">:</span></span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="at">    </span><span class="fu">name</span><span class="kw">:</span><span class="at"> pandoc/latex:latest</span><span class="co"> # Use a TeX Live image that contains LaTeX</span></span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="at">    </span><span class="fu">entrypoint</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">""</span><span class="kw">]</span><span class="co"> # Override the default entrypoint</span></span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="at">  </span><span class="fu">script</span><span class="kw">:</span></span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> echo "Generating PDF from Markdown source..."</span></span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> pandoc my_document.md --output my_document.pdf</span><span class="co"> # Convert with pandoc</span></span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> echo "PDF generation complete."</span></span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> ls -a</span></span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a><span class="at">  </span><span class="fu">artifacts</span><span class="kw">:</span></span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a><span class="at">    </span><span class="fu">paths</span><span class="kw">:</span></span>
+<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> my_document.pdf</span></span></code></pre>
+</div>
+<p>Then let’s also update our pages job to also publish the PDF file
+that we just generated:</p>
+<div class="codewrapper sourceCode" id="cb3">
+<h3 class="code-label">YAML<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode yaml" tabindex="0"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="fu">pages</span><span class="kw">:</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="at">  </span><span class="fu">stage</span><span class="kw">:</span><span class="at"> deploy</span></span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="at">  </span><span class="fu">script</span><span class="kw">:</span></span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> echo "Deploying to GitLab Pages..."</span></span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> mkdir -p public</span><span class="co"> # Create the public directory if it doesn't exist</span></span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> mv main.pdf public/</span><span class="co"> # Move the generated PDF file to public</span></span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> mv my_document.pdf public/</span><span class="co"> # Move the presentation.pdf file to public</span></span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> mv README.md public/</span><span class="co"> # Move the README.md file to public</span></span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> mv index.html public/</span><span class="co"> # Move the index.html file to public</span></span>
+<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a><span class="at">  </span><span class="fu">artifacts</span><span class="kw">:</span></span>
+<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a><span class="at">    </span><span class="fu">paths</span><span class="kw">:</span></span>
+<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> public</span><span class="co"> # Save the public directory as an artifact</span></span></code></pre>
+</div>
+<div id="callout1" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<span class="callout-header">Callout</span>
+<div class="callout-inner">
+<div class="callout-content">
+<p>If you finished Challenge 3 in the previous episode, you can also add
+the following to your html file to add a link to the presentation:</p>
+<div class="codewrapper sourceCode" id="cb4">
+<h3 class="code-label">HTML<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode html" tabindex="0"><code class="sourceCode html"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">li</span><span class="dt">&gt;&lt;</span><span class="kw">a</span><span class="ot"> href</span><span class="op">=</span><span class="st">"my_document.pdf"</span><span class="dt">&gt;</span>View Pandoc Document<span class="dt">&lt;/</span><span class="kw">a</span><span class="dt">&gt;&lt;/</span><span class="kw">li</span><span class="dt">&gt;</span></span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<p>After the pipeline runs, you should be able to access the PDF via the
+pages url for your project. It should look somehing like this:</p>
+<figure><img src="fig/04-pandoc/plain-pandoc-output.png" alt="Screenshot of the PDF file generated by Pandoc from the Markdown source file." class="figure mx-auto d-block"></figure><p>Note that Pandoc did a pretty good job converting our Markdown file -
+the metadata in our YAML front matter has been used to create a title
+section. We even still got to use the <code>\LaTeX</code> command to get
+the LaTeX logo. However the overal pdf is somewhat plain looking.</p>
+</section><section><h2 class="section-heading" id="applying-a-template-to-the-document">Applying a Template to the Document<a class="anchor" aria-label="anchor" href="#applying-a-template-to-the-document"></a>
+</h2>
+<hr class="half-width">
+<p>The PDF file generated by Pandoc from the Markdown source file is a
+little plain. We can apply a template to the document to alter the
+output style. Pandoc supports a variety of templates that we can specify
+using the <code>--template</code> option when we run the
+<code>pandoc</code> command.</p>
+<p>We will also need use a different Docker image that contains some
+additional packages and templates called <code>pandoc/extra</code>.
+Let’s update our <code>build-job-pandoc</code> to use this image and to
+apply the <code>eisvogel</code> template to our document:</p>
+<div class="codewrapper sourceCode" id="cb5">
+<h3 class="code-label">YAML<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode yaml" tabindex="0"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="fu">build-job-pandoc</span><span class="kw">:</span><span class="co">       # This job runs in the build stage, which runs first.</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="at">  </span><span class="fu">stage</span><span class="kw">:</span><span class="at"> build</span></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="at">  </span><span class="fu">image</span><span class="kw">:</span></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="at">    </span><span class="fu">name</span><span class="kw">:</span><span class="at"> pandoc/extra:latest</span><span class="co"> # Use the Official Pandoc image</span></span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a><span class="at">    </span><span class="fu">entrypoint</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">""</span><span class="kw">]</span><span class="co"> # Override the default entrypoint</span></span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="at">  </span><span class="fu">script</span><span class="kw">:</span></span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> echo "Generating PDF from Markdown source..."</span></span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> pandoc my_document.md --output my_document.pdf --template eisvogel</span><span class="co"> # Convert with pandoc</span></span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> echo "PDF generation complete."</span></span>
+<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> ls -a</span></span>
+<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a><span class="at">  </span><span class="fu">artifacts</span><span class="kw">:</span></span>
+<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a><span class="at">    </span><span class="fu">paths</span><span class="kw">:</span></span>
+<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> my_document.pdf</span></span></code></pre>
+</div>
+<p>After the pipeline runs, you should be able to access the PDF via the
+pages url for your project. The output should look something like
+this:</p>
+<figure><img src="fig/04-pandoc/eisvogel-pandoc-output.png" alt="Screenshot of the PDF file generated by Pandoc from the Markdown source file." class="figure mx-auto d-block"></figure><p>It’s still a little plain, but the template has modified the general
+appearance of our metadata, adding a header and footer section, with our
+content in the middle.</p>
+<div class="section level3">
+<h3 id="adding-additional-metadata">Adding Additional Metadata<a class="anchor" aria-label="anchor" href="#adding-additional-metadata"></a>
+</h3>
+<p>At the moment we’ve only defined the title, author and date in our
+metadata, but EisVogel can parse additional fields to customize the
+appearance of the final document. Let’s add some more data to our YAML
+front matter and include some sections in our content</p>
+<div class="codewrapper sourceCode" id="cb6">
+<h3 class="code-label">MARKDOWN<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode markdown" tabindex="0"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="an">title:</span><span class="co"> "My Document"</span></span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Max Mustermann"</span></span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="an">date:</span><span class="co"> "2000-01-01"</span></span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="an">titlepage:</span><span class="co"> true</span></span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="an">toc:</span><span class="co"> true</span></span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="an">toc-own-page:</span><span class="co"> true</span></span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a><span class="fu"># Hello LaTeX!</span></span>
+<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a>This is the first section of our document.</span>
+<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a></span>
+<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a><span class="fu">## This is a subsection of the first section</span></span>
+<span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a></span>
+<span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a><span class="fu"># This is the second section of our document.</span></span>
+<span id="cb6-17"><a href="#cb6-17" tabindex="-1"></a></span>
+<span id="cb6-18"><a href="#cb6-18" tabindex="-1"></a>Here's some text in the second section.</span></code></pre>
+</div>
+<p>Run the pipeline again and see how the output has changed:</p>
+<figure><img src="fig/04-pandoc/eisvogel-pandoc-output-titlepage.png" alt="Screenshot of the PDF file generated by Pandoc from the Markdown source file with additional metadata." class="figure mx-auto d-block"></figure><p>Without touching anything other than the contents of the markdown
+file, we have a nicely formatted PDF document with a title page and a
+table of contents!</p>
+<div id="challenge-1-add-some-additional-content-to-the-markdown-file." class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<span class="callout-header">Challenge</span>
+<div id="challenge-1-add-some-additional-content-to-the-markdown-file." class="callout-inner">
+<h3 class="callout-title">Challenge 1: Add some additional content to
+the Markdown file.</h3>
+<div class="callout-content">
+<p>Add some additional content to the <code>my_document.md</code> file,
+e.g. add a new section with some text. Try adding some additional
+markdown elements, like links, tables, and code blocks.</p>
+<p>(You can reference this <a href="https://www.markdownguide.org/cheat-sheet/" class="external-link">Markdown Cheat
+Sheet</a> for ideas.)</p>
+<p>Run the pipeline again and see how the output has changed.</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div class="accordion-body">
+<p>There’s no real right answer, but here’s an example of what you might
+have added to your <code>my_document.md</code> file:</p>
+<div class="codewrapper sourceCode" id="cb7">
+<h3 class="code-label">MARKDOWN<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode markdown" tabindex="0"><code class="sourceCode markdown"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="an">title:</span><span class="co"> "My Document"</span></span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Max Mustermann"</span></span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a><span class="an">date:</span><span class="co"> "2000-01-01"</span></span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a><span class="an">titlepage:</span><span class="co"> true</span></span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a><span class="an">toc:</span><span class="co"> true</span></span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a><span class="an">toc-own-page:</span><span class="co"> true</span></span>
+<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a><span class="fu"># Hello LaTeX!</span></span>
+<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a></span>
+<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a>This is the first section of our document.</span>
+<span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a></span>
+<span id="cb7-14"><a href="#cb7-14" tabindex="-1"></a>There is a markdown cheat sheet available <span class="co">[</span><span class="ot">here</span><span class="co">](https://www.markdownguide.org/cheat-sheet/)</span>.</span>
+<span id="cb7-15"><a href="#cb7-15" tabindex="-1"></a></span>
+<span id="cb7-16"><a href="#cb7-16" tabindex="-1"></a><span class="fu">## This is a subsection of the first section</span></span>
+<span id="cb7-17"><a href="#cb7-17" tabindex="-1"></a></span>
+<span id="cb7-18"><a href="#cb7-18" tabindex="-1"></a>Here is an example of a code block:</span>
+<span id="cb7-19"><a href="#cb7-19" tabindex="-1"></a></span>
+<span id="cb7-20"><a href="#cb7-20" tabindex="-1"></a><span class="in">```python</span></span>
+<span id="cb7-21"><a href="#cb7-21" tabindex="-1"></a><span class="kw">def</span> greet(name):</span>
+<span id="cb7-22"><a href="#cb7-22" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Hello, </span><span class="sc">{</span>name<span class="sc">}</span><span class="ss">!"</span>)</span>
+<span id="cb7-23"><a href="#cb7-23" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb7-24"><a href="#cb7-24" tabindex="-1"></a></span>
+<span id="cb7-25"><a href="#cb7-25" tabindex="-1"></a><span class="fu"># This is the second section of our document.</span></span>
+<span id="cb7-26"><a href="#cb7-26" tabindex="-1"></a></span>
+<span id="cb7-27"><a href="#cb7-27" tabindex="-1"></a>Here's a table:</span>
+<span id="cb7-28"><a href="#cb7-28" tabindex="-1"></a><span class="pp">|</span> Fruit  <span class="pp">|</span> Quantity <span class="pp">|</span> Price <span class="pp">|</span></span>
+<span id="cb7-29"><a href="#cb7-29" tabindex="-1"></a><span class="pp">|--------|----------|-------|</span></span>
+<span id="cb7-30"><a href="#cb7-30" tabindex="-1"></a><span class="pp">|</span> Apple  <span class="pp">|</span> 10       <span class="pp">|</span> 1.50  <span class="pp">|</span></span>
+<span id="cb7-31"><a href="#cb7-31" tabindex="-1"></a><span class="pp">|</span> Banana <span class="pp">|</span> 5        <span class="pp">|</span> 10.00 <span class="pp">|</span></span></code></pre>
+</div>
+<p>And it might end up looking something like this:</p>
+<figure><img src="fig/04-pandoc/eisvogel-pandoc-output-additional-markdown.png" alt="Screenshot of the PDF file generated by Pandoc from the Markdown source file with additional content." class="figure mx-auto d-block"></figure><p>Note the syntax highlighting in the code block and the formatting of
+the table!</p>
+</div>
+</div>
+</div>
+</div>
+<div id="challenge-2-pandoc-variables" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<span class="callout-header">Challenge</span>
+<div id="challenge-2-pandoc-variables" class="callout-inner">
+<h3 class="callout-title">Challenge 2: Pandoc Variables</h3>
+<div class="callout-content">
+<p>Pandoc supports a variety of variables that can be used to customize
+the output of the document that we can add to the YAML front matter of
+our Markdown file. Check out the pandoc documentation and try a few
+variables to see how they affect the output:</p>
+<ul>
+<li>
+<a href="https://pandoc.org/MANUAL.html#metadata-variables" class="external-link">Pandoc
+documentation for Metadata Variables</a>.</li>
+<li>
+<a href="https://pandoc.org/MANUAL.html#variables-for-latex" class="external-link">Pandoc
+documentation for LaTeX variables</a>.</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
+  <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
+</button>
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div class="accordion-body">
+<p>Again, there’s no one right answer, but a couple things to try
+out:</p>
+<div class="codewrapper sourceCode" id="cb8">
+<h3 class="code-label">MARKDOWN<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode markdown" tabindex="0"><code class="sourceCode markdown"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="an">title:</span><span class="co"> "My Document"</span></span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Max Mustermann"</span></span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="an">date:</span><span class="co"> "2000-01-01"</span></span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="an">titlepage:</span><span class="co"> true</span></span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="an">toc:</span><span class="co"> true</span></span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "This is a subtitle"</span></span>
+<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a><span class="an">abstract:</span><span class="co"> "This is an abstract of the document."</span></span>
+<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a><span class="an">keywords:</span><span class="co"> ["pandoc", "markdown", "latex"]</span></span>
+<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a><span class="an">hyperrefoptions:</span></span>
+<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a><span class="co">- linktoc=all</span></span>
+<span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a><span class="an">colorlinks:</span><span class="co"> true</span></span>
+<span id="cb8-13"><a href="#cb8-13" tabindex="-1"></a><span class="co">---</span></span></code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p><a href="https://pandoc.org/MANUAL.html#metadata-variables" class="external-link uri">https://pandoc.org/MANUAL.html#metadata-variables</a></p>
+<div id="keypoints1" class="callout keypoints">
+<div class="callout-square">
+<i class="callout-icon" data-feather="key"></i>
+</div>
+<span class="callout-header">Key Points</span>
+<div class="callout-inner">
+<div class="callout-content">
+<ul><li>
+</li></ul>
 </div>
 </div>
 </div>
@@ -1493,8 +1854,8 @@ any links that you are not going to use.
   "url": "https://dkz2r.github.io/latex-cicd-rwth/aio.html",
   "identifier": "https://dkz2r.github.io/latex-cicd-rwth/aio.html",
   "dateCreated": "2026-03-02",
-  "dateModified": "2026-03-03",
-  "datePublished": "2026-03-03"
+  "dateModified": "2026-03-04",
+  "datePublished": "2026-03-04"
 }
 
   </script><script>

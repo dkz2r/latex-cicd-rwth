@@ -119,11 +119,11 @@
   Generating LaTeX With GitLab CICD
 </div>
 
-<aside class="col-md-12 lesson-progress"><div style="width: 67%" class="percentage">
-    67%
+<aside class="col-md-12 lesson-progress"><div style="width: 50%" class="percentage">
+    50%
   </div>
   <div class="progress incubator">
-    <div class="progress-bar incubator" role="progressbar" style="width: 67%" aria-valuenow="67" aria-label="Lesson Progress" aria-valuemin="0" aria-valuemax="100">
+    <div class="progress-bar incubator" role="progressbar" style="width: 50%" aria-valuenow="50" aria-label="Lesson Progress" aria-valuemin="0" aria-valuemax="100">
     </div>
   </div>
 </aside><div class="container">
@@ -244,6 +244,15 @@
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
+<div class="accordion accordion-flush" id="accordionFlush5">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading5">
+        <a href="04-pandoc.html">4. Pandoc</a>
+    </div><!--/div.accordion-header-->
+
+  </div><!--/div.accordion-item-->
+</div><!--/div.accordion-flush-->
+
                 </div>
               </div>
             </div>
@@ -287,7 +296,7 @@
   <div class="col-xl-8 col-lg-12 primary-content">
     <nav class="lesson-content mx-md-4" aria-label="Previous and Next Chapter"><!-- content for small screens --><div class="d-block d-sm-block d-md-none">
         <a class="chapter-link" href="02-understanding-the-cicd-file.html"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous</a>
-        <a class="chapter-link float-end" href="index.html">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
+        <a class="chapter-link float-end" href="04-pandoc.html">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
       </div>
       <!-- content for large screens -->
       <div class="d-none d-sm-none d-md-block">
@@ -295,14 +304,14 @@
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>
           Previous: Understanding the
         </a>
-        <a class="chapter-link float-end" href="index.html" rel="next">
-          Home
+        <a class="chapter-link float-end" href="04-pandoc.html" rel="next">
+          Next: Pandoc...
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i>
         </a>
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Using CI/CD to Build and Deploy a LaTeX Document</h1>
-        <p>Last updated on 2026-03-03 |
+        <p>Last updated on 2026-03-04 |
 
         <a href="https://github.com/dkz2r/latex-cicd-rwth/edit/main/episodes/03-build-and-deploy.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -443,8 +452,13 @@ of our repository with the following content:</p>
 <span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>Hello <span class="fu">\LaTeX</span>!</span>
 <span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="kw">\end</span>{<span class="ex">document</span>}</span></code></pre>
 </div>
-<p>Next, we need to tell our CI/CD pipeline to use this image, and to
-run the command to build our LaTeX document:</p>
+<p>We want to use CI/CD to automatically build this LaTeX document into
+a PDF file, so we’ll need to use a docker image that contains LaTeX.
+Searching for “latex” on Docker Hub gives us a few options, and for this
+workshop we’ll use the <code>texlive/texlive</code> image, which
+contains the TeX Live distribution of LaTeX.</p>
+<p>We’ll update our CI/CD pipeline to use this image, and to run the
+command to build our LaTeX document:</p>
 <div class="codewrapper sourceCode" id="cb3">
 <h3 class="code-label">YAML<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -745,12 +759,12 @@ files:</p>
 <span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="at">  </span><span class="fu">script</span><span class="kw">:</span></span>
 <span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> echo "Deploying to GitLab Pages..."</span></span>
 <span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> mkdir -p public</span><span class="co"> # Create the public directory if it doesn't exist</span></span>
-<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> mv main.pdf public/</span><span class="co"> # Move the generated PDF file to the public directory</span></span>
-<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> mv README.md public/</span><span class="co"> # Move the README.md file to the public directory</span></span>
-<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> mv index.html public/</span><span class="co"> # Move the index.html file to the public directory</span></span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> mv main.pdf public/</span><span class="co"> # Move the generated PDF file to public</span></span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> mv README.md public/</span><span class="co"> # Move the README.md file to public</span></span>
+<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> mv index.html public/</span><span class="co"> # Move the index.html file to public</span></span>
 <span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a><span class="at">  </span><span class="fu">artifacts</span><span class="kw">:</span></span>
 <span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a><span class="at">    </span><span class="fu">paths</span><span class="kw">:</span></span>
-<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> public</span><span class="co"> # Save the public directory as an artifact so that it can be deployed to Pages</span></span></code></pre>
+<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> public</span><span class="co"> # Save the public directory as an artifact</span></span></code></pre>
 </div>
 </div>
 </div>
@@ -782,7 +796,7 @@ any links that you are not going to use.
 </section></div> <!-- / div.lesson-content -->
     </main><!-- / main#main-content.main-content --><nav class="bottom-pagination mx-md-4" aria-label="Previous and Next Chapter"><div class="d-block d-sm-block d-md-none">
         <a class="chapter-link" href="02-understanding-the-cicd-file.html"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous</a>
-        <a class="chapter-link float-end" href="index.html">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
+        <a class="chapter-link float-end" href="04-pandoc.html">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
       </div>
       <!-- content for large screens -->
       <div class="d-none d-sm-none d-md-block">
@@ -790,8 +804,8 @@ any links that you are not going to use.
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>
           Previous: Understanding the
         </a>
-        <a class="chapter-link float-end" href="index.html" rel="next">
-          Home
+        <a class="chapter-link float-end" href="04-pandoc.html" rel="next">
+          Next: Pandoc...
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i>
         </a>
       </div>
@@ -839,8 +853,8 @@ any links that you are not going to use.
   "url": "https://dkz2r.github.io/latex-cicd-rwth/03-build-and-deploy.html",
   "identifier": "https://dkz2r.github.io/latex-cicd-rwth/03-build-and-deploy.html",
   "dateCreated": "2026-03-02",
-  "dateModified": "2026-03-03",
-  "datePublished": "2026-03-03"
+  "dateModified": "2026-03-04",
+  "datePublished": "2026-03-04"
 }
 
   </script><script>
