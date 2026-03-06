@@ -90,6 +90,17 @@ pages:
 
 ::: callout
 
+You can of course, also just move all the files in the current directory to the public directory
+with the command `mv * public/`. This would be more concise, but would also move any other files
+that we might have in the directory, which we might not want to publish.
+
+We could get around this by either setting the output of our pandoc commands to be in either the
+public directory or a separate directory that we then move to the public directory.
+
+:::
+
+::: callout
+
 If you finished Challenge 3 in the previous episode, you can also add the following to your
 html file to add a link to the presentation:
 
