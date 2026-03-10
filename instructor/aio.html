@@ -290,6 +290,18 @@
 </div>
 <!--/div.accordion-flush-->
 
+<div class="accordion accordion-flush" id="accordionFlush6">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading6">
+        <a href="05-custom-templates.html">5. </a>
+    </div>
+<!--/div.accordion-header-->
+
+  </div>
+<!--/div.accordion-item-->
+</div>
+<!--/div.accordion-flush-->
+
                 </div>
               </div>
             </div>
@@ -469,7 +481,7 @@ your project.</p>
 <button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler1" aria-expanded="false" aria-controls="collapseSpoiler1">
   <h3 class="accordion-header" id="headingSpoiler1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> Show details </h3>
 </button>
-<div id="collapseSpoiler1" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler1" aria-labelledby="headingSpoiler1">
+<div id="collapseSpoiler1" class="accordion-collapse collapse" aria-labelledby="headingSpoiler1" data-bs-parent="#accordionSpoiler1">
 <div class="accordion-body">
 <p>In case the “Configure Pipeline” button does not work for you, you
 can also create a new file in the root directory of your project called
@@ -766,7 +778,7 @@ stage of our pipeline. This job should be called
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb8">
 <h3 class="code-label">YAML<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -813,7 +825,7 @@ in order for this job to run successfully?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>We must add the <code>validate</code> stage to our
 <code>stages</code> section at the top of the file:</p>
@@ -865,7 +877,7 @@ CI/CD Predefined Variables</a> and see what happens.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <p><code>ls -a</code> will print out all files in the current directory,
 including hidden files. Your output might look something like this:</p>
@@ -926,7 +938,7 @@ installed in the runner</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
   <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
 <div class="accordion-body">
 <p>The pipeline will fail with an error message that looks something
 like this:</p>
@@ -1467,7 +1479,7 @@ any links that you are not going to use.
 </div>
 </section></section><section id="aio-04-pandoc"><p>Content from <a href="04-pandoc.html">Pandoc</a></p>
 <hr>
-<p>Last updated on 2026-03-09 |
+<p>Last updated on 2026-03-10 |
 
         <a href="https://github.com/dkz2r/latex-cicd-rwth/edit/main/episodes/04-pandoc.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 12 minutes</p>
@@ -1579,6 +1591,24 @@ that we just generated:</p>
 <span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> public</span><span class="co"> # Save the public directory as an artifact</span></span></code></pre>
 </div>
 <div id="callout1" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<span class="callout-header">Callout</span>
+<div class="callout-inner">
+<div class="callout-content">
+<p>You can of course, also just move all the files in the current
+directory to the public directory with the command
+<code>mv * public/</code>. This would be more concise, but would also
+move any other files that we might have in the directory, which we might
+not want to publish.</p>
+<p>We could get around this by either setting the output of our pandoc
+commands to be in either the public directory or a separate directory
+that we then move to the public directory.</p>
+</div>
+</div>
+</div>
+<div id="callout2" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
@@ -1798,13 +1828,13 @@ that you added:</p>
 </div>
 </div>
 </div>
-<div id="challenge-3-add-another-file-ouput-type" class="callout challenge">
+<div id="challenge-3-add-another-file-output-type" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <span class="callout-header">Challenge</span>
-<div id="challenge-3-add-another-file-ouput-type" class="callout-inner">
-<h3 class="callout-title">Challenge 3: Add another File Ouput Type</h3>
+<div id="challenge-3-add-another-file-output-type" class="callout-inner">
+<h3 class="callout-title">Challenge 3: Add another File Output Type</h3>
 <div class="callout-content">
 <p>We’ve just done markdown to PDF, but Pandoc can convert to a variety
 of different formats. Try adding a line to your
@@ -1846,6 +1876,326 @@ including PDF files.</li>
 <li>We can apply templates to our Pandoc documents to customize the
 appearance of the output.</li>
 </ul>
+</div>
+</div>
+</div>
+<!--
+Place links that you need to refer to multiple times across pages here. Delete
+any links that you are not going to use.
+ -->
+</div>
+</section></section><section id="aio-05-custom-templates"><p>Content from <a href="05-custom-templates.html"></a></p>
+<hr>
+<p>Last updated on 2026-03-10 |
+
+        <a href="https://github.com/dkz2r/latex-cicd-rwth/edit/main/episodes/05-custom-templates.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
+<p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 12 minutes</p>
+<div class="text-end">
+          <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right" data-expand="Expand All Solutions " data-collapse="Collapse All Solutions "> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
+        </div>
+<div class="overview card">
+<h2 class="card-header">Overview</h2>
+<div class="row g-0">
+<div class="col-md-4">
+<div class="card-body">
+<div class="inner">
+<h3 class="card-title">Questions</h3>
+<ul>
+<li>How can we use the <code>beamer</code> class to create a
+presentation with Pandoc?</li>
+<li>How can we use custom templates with Pandoc?</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="col-md-8">
+<div class="card-body">
+<div class="inner bordered">
+<h3 class="card-title">Objectives</h3>
+<ul>
+<li>Create a presentation in Markdown and render it to PDF using the
+<code>beamer</code> class.</li>
+<li>Use a custom template to create a presentation in Pandoc.</li>
+<li>Add LaTeX commands to a markdown file to customize the output.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<section><h2 class="section-heading" id="the-beamer-class">The Beamer Class<a class="anchor" aria-label="anchor" href="#the-beamer-class"></a>
+</h2>
+<hr class="half-width">
+<p>In the previous episode we used the default document template to
+create a plain document. This time, we’re going to use the
+<code>beamer</code> class to create a presentation. The
+<code>beamer</code> class is a popular LaTeX class for creating slide
+presentations. Just like we did in the previous episode, we can create a
+markdown file with some content and then use Pandoc to convert it into a
+PDF.</p>
+<div id="callout1" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<span class="callout-header">Callout</span>
+<div class="callout-inner">
+<div class="callout-content">
+<p>Each Heading in the markdown file will be converted into a new slide
+in the presentation. The content of each slide will be determined by the
+content under the corresponding heading in the markdown file.</p>
+</div>
+</div>
+</div>
+<p>Let’s start with a simple markdown file that contains some headings
+and some content under each heading:</p>
+<div class="codewrapper sourceCode" id="cb1">
+<h3 class="code-label">MARKDOWN<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode markdown" tabindex="0"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="an">title:</span><span class="co"> "My Presentation"</span></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Max Mustermann"</span></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="an">date:</span><span class="co"> "2000-01-01"</span></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="fu"># Slide 1</span></span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>This is the first slide.</span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a><span class="fu"># Slide 2</span></span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>This is the second slide.</span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a><span class="ss">- </span>This is a bullet point on the second slide.</span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a><span class="ss">- </span>This is another bullet point on the second slide.</span></code></pre>
+</div>
+<p>As with our last document, we’ll add some metadata in the YAML front
+matter at the top of the file. This will be used by Pandoc to create a
+title slide for our presentation.</p>
+<p>Finally, we’ll add a line to our CI/CD script to render the
+document:</p>
+<div class="codewrapper sourceCode" id="cb2">
+<h3 class="code-label">YAML<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode yaml" tabindex="0"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="kw">-</span><span class="at"> pandoc presentation.md --output presentation.pdf</span></span></code></pre>
+</div>
+<p>Saving this file to our repository should trigger the pipleine. After
+running, you should find a PDF file that looks something like this:</p>
+<figure><img src="../fig/05-custom-templates/pandoc-beamer-first.png" alt="Screenshot of the presentation PDF file generated by Pandoc from the Markdown source file." class="figure mx-auto d-block"></figure><p>Wait, what? Why doesn’t it look like a presentation? We never told
+Pandoc to use the <code>beamer</code> class, and Pandoc isn’t going to
+assume anything about the output format if we don’t tell it. We need to
+update our CI/CD script to specify that we want to use the
+<code>beamer</code> class. We can do this by adding the
+<code>-t beamer</code> option to our Pandoc command:</p>
+<div class="codewrapper sourceCode" id="cb3">
+<h3 class="code-label">YAML<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode yaml" tabindex="0"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="kw">-</span><span class="at"> pandoc presentation.md --output presentation.pdf -t beamer</span></span></code></pre>
+</div>
+<p>That looks better!:</p>
+<figure><img src="../fig/05-custom-templates/pandoc-beamer-output.png" alt="Screenshot of the presentation PDF file generated by Pandoc from the Markdown source file, using the beamer class." class="figure mx-auto d-block"></figure></section><section><h2 class="section-heading" id="the-rwth-template">The RWTH Template<a class="anchor" aria-label="anchor" href="#the-rwth-template"></a>
+</h2>
+<hr class="half-width">
+<p>In the previous episode, we used the EisVogel template to create a
+simple PDF document from our Markdown source file. This time, we’re
+going to use a custom template that has been created for RWTH. This will
+require a few more steps to set up, as we will have to extend our Docker
+image slightly.</p>
+<div class="section level3">
+<h3 id="installing-the-rwth-template">Installing the RWTH template<a class="anchor" aria-label="anchor" href="#installing-the-rwth-template"></a>
+</h3>
+<p>The current Pandoc image does not contain the RWTH template and its
+dependencies, so we will have to add some extra information to our CI/CD
+script. We can do this in a section called <code>before_script</code>,
+which is a section that allows us to specify commands that should be run
+before anything in the <code>scripts</code> section.</p>
+<div class="codewrapper sourceCode" id="cb4">
+<h3 class="code-label">YAML<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode yaml" tabindex="0"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="fu">before_script</span><span class="kw">:</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> tlmgr option repository https://ftp.tu-chemnitz.de/pub/tug/historic/systems/texlive/2025/tlnet-final/</span></span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> tlmgr install rwth-ci anyfontsize tex-gyre arimo fontaxes extsizes</span></span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> tlmgr install --reinstall beamer</span></span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> echo '\providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}' &gt; header.tex</span></span></code></pre>
+</div>
+<div id="callout2" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<span class="callout-header">Callout</span>
+<div class="callout-inner">
+<div class="callout-content">
+<p>An explanation of the commands in this section:</p>
+<ul>
+<li>
+<code>tlmgr</code> is the TeX Live package manager.</li>
+<li>The first command sets the repository that <code>tlmgr</code> will
+use to install packages. We need to use a specific repository that
+contains the RWTH template and its dependencies.
+<ul>
+<li>This is required at the moment because an update in the TeX Live
+distribution causes errors when installing the RWTH template and its
+dependencies. This is a temporary workaround until the issue is
+resolved.</li>
+</ul>
+</li>
+<li>The second command installs the RWTH template and its dependencies
+using <code>tlmgr</code>.</li>
+<li>The third command reinstalls the <code>beamer</code> package.</li>
+<li>The fourth command creates a <code>header.tex</code> file that
+contains a definition for the <code>\tightlist</code> command. This
+command is used in the template by pandoc, and is not defined by
+default.</li>
+</ul>
+</div>
+</div>
+</div>
+<p>Finally, we need to update our pandoc command to tell it to use the
+RWTH template. We can do this by specifically telling pandoc that we
+want to use the <code>rwth-beamer</code> class.</p>
+<div id="callout3" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<span class="callout-header">Callout</span>
+<div class="callout-inner">
+<div class="callout-content">
+<p>We also need to tell pandoc to use the <code>header.tex</code> file
+that we created in the <code>before_script</code> section. This is done
+using the <code>--include-in-header</code> option. The template uses the
+<code>\tightlist</code> command, which is not defined by default, so we
+have defined it in the <code>header.tex</code> file to avoid errors when
+rendering the document.</p>
+</div>
+</div>
+</div>
+<p>Our final pandoc command should look like this:</p>
+<div class="codewrapper sourceCode" id="cb5">
+<h3 class="code-label">YAML<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode yaml" tabindex="0"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="at">pandoc presentation.md -t beamer --output presentation_rwth.pdf -V documentclass=rwth-beamer --include-in-header=header.tex</span></span></code></pre>
+</div>
+<p>And when we run the pipeline, we should get a PDF file that looks
+something like this:</p>
+<figure><img src="../fig/05-custom-templates/pandoc-rwth-beamer-output.png" alt="Screenshot of the presentation PDF file generated by Pandoc from the Markdown source file, using the RWTH beamer template." class="figure mx-auto d-block"></figure>
+</div>
+<div class="section level3">
+<h3 id="the-missing-logo-file">The Missing Logo File<a class="anchor" aria-label="anchor" href="#the-missing-logo-file"></a>
+</h3>
+<p>Our template is missing one last thing - the logo file. The template
+prints out a message that says
+<code>Missing Logo file rwth_mx&gt;</code>. First off, we need a logo
+file. We can find an example file in the <a href="https://gitlab.git.nrw/rwth-it-center/rwth-latex-templates/musterlogo" class="external-link">RWTH-LaTeX-Templates
+repository</a>. For our project, we will download the
+<code>rwth_mx_cmyk.pdf</code> file and add it to the root of our
+repository.</p>
+<p>If we were writing a LaTeX document, we would add the logo file as
+one of the parameters to the document class, like this:</p>
+<div class="codewrapper sourceCode" id="cb6">
+<h3 class="code-label">LATEX<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode latex" tabindex="0"><code class="sourceCode latex"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="bu">\documentclass</span>[logofile=img/rwth_mx_rgb]{<span class="ex">rwth-beamer</span>}</span></code></pre>
+</div>
+<p>We can do the same thing with pandoc by adding to the YAML front
+matter of our markdown file:</p>
+<div class="codewrapper sourceCode" id="cb7">
+<h3 class="code-label">YAML<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode yaml" tabindex="0"><code class="sourceCode yaml"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">"My Presentation"</span></span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a><span class="fu">author</span><span class="kw">:</span><span class="at"> </span><span class="st">"Max Mustermann"</span></span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a><span class="fu">date</span><span class="kw">:</span><span class="at"> </span><span class="st">"2000-01-01"</span></span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a><span class="fu">classoption</span><span class="kw">:</span></span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> logofile=rwth-mx-cmyk</span></span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a><span class="pp">---</span></span></code></pre>
+</div>
+<p>Our slides should now look like this:</p>
+<figure><img src="../fig/05-custom-templates/pandoc-rwth-beamer-with-logo.png" alt="Screenshot of the presentation PDF file generated by Pandoc from the Markdown source file, using the RWTH beamer template with the logo file." class="figure mx-auto d-block"></figure>
+</div>
+<div class="section level3">
+<h3 id="adding-latex-commands-to-the-template">Adding LaTeX Commands to the Template<a class="anchor" aria-label="anchor" href="#adding-latex-commands-to-the-template"></a>
+</h3>
+<p>We can do all of the basic formatting and content in our markdown
+file, but we are of course somewhat limited in what we can do with
+markdown alone. There are may additional options we can perform by
+adding LaTeX commands to our markdown file. Try updating your markdown
+file like this:</p>
+<div class="codewrapper sourceCode" id="cb8">
+<h3 class="code-label">MARKDOWN<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode markdown" tabindex="0"><code class="sourceCode markdown"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="an">title:</span><span class="co"> "My Presentation"</span></span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Max Mustermann"</span></span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="an">date:</span><span class="co"> "2000-01-01"</span></span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="an">classoption:</span></span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="co">  - logofile=rwth-mx-cmyk</span></span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a><span class="fu"># Slide 1</span></span>
+<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a>This is the first slide.</span>
+<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a></span>
+<span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a><span class="fu"># Slide 2</span></span>
+<span id="cb8-13"><a href="#cb8-13" tabindex="-1"></a>This is the second slide.</span>
+<span id="cb8-14"><a href="#cb8-14" tabindex="-1"></a></span>
+<span id="cb8-15"><a href="#cb8-15" tabindex="-1"></a><span class="ss">- </span>This is a bullet point on the second slide.</span>
+<span id="cb8-16"><a href="#cb8-16" tabindex="-1"></a></span>
+<span id="cb8-17"><a href="#cb8-17" tabindex="-1"></a>/pause</span>
+<span id="cb8-18"><a href="#cb8-18" tabindex="-1"></a></span>
+<span id="cb8-19"><a href="#cb8-19" tabindex="-1"></a><span class="ss">- </span>This is another bullet point on the second slide.</span></code></pre>
+</div>
+<p>After running the pipeline, you should see that the third slide is
+now split into two slides, with the first bullet point appearing on the
+second slide, and the second bullet point appearing on a third slide.
+This is because the <code>/pause</code> command tells the
+<code>beamer</code> class to pause the slide at that point and wait for
+the user to click before showing the rest of the content.</p>
+<div id="challenge-1-adding-an-alert-to-a-slide" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<span class="callout-header">Challenge</span>
+<div id="challenge-1-adding-an-alert-to-a-slide" class="callout-inner">
+<h3 class="callout-title">Challenge 1: Adding an alert to a Slide</h3>
+<div class="callout-content">
+<p>At the end of the episode, we added a <code>/pause</code> command to
+our markdown file to split a slide into two slides. The
+<code>beamer</code> class also has an <code>\alert</code> command. Try
+adding the following content to your markdown file:</p>
+<div class="codewrapper sourceCode" id="cb9">
+<h3 class="code-label">MARKDOWN<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode markdown" tabindex="0"><code class="sourceCode markdown"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="fu"># Slide 3</span></span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a><span class="ss">- </span>\alert&lt;1&gt;{This is a bullet point on the third slide.}</span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a><span class="ss">- </span>\alert&lt;2&gt;{This is another bullet point on the third slide.}</span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a><span class="ss">- </span>\alert&lt;3&gt;{This is yet another bullet point on the third slide.}</span></code></pre>
+</div>
+<p>What does this do? What happens if you change the numbers in the
+<code>alert</code> commands? What happens if you remove the numbers?</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div class="accordion-body">
+<p>The <code>\alert</code> command is used to highlight specific content
+on a slide. The numbers in the <code>alert</code> commands specify the
+order in which the content will be highlighted. If you remove the
+numbers, all of the content will be highlighted at the same time.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="keypoints1" class="callout keypoints">
+<div class="callout-square">
+<i class="callout-icon" data-feather="key"></i>
+</div>
+<span class="callout-header">Key Points</span>
+<div class="callout-inner">
+<div class="callout-content">
+<ul><li>
+</li></ul>
 </div>
 </div>
 </div>
