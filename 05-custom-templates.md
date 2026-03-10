@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Working with Custom Templates"
 teaching: 10 # teaching time in minutes
 exercises: 2 # exercise time in minutes
 ---
@@ -240,7 +240,8 @@ all of the content will be highlighted at the same time.
 
 ::::::::::::::::::::::::::::::::::::: keypoints
 
--
+- The `beamer` class is a popular LaTeX class for creating slide presentations.
+- We can use custom templates with Pandoc to create more complex documents.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
