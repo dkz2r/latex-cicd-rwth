@@ -293,7 +293,7 @@ the document properties, you should see the keywords that you added:
 
 ::::::::::::::::::::::::::::::::::::: challenge
 
-## Challenge 3: Add another File Ouput Type
+## Challenge 3: Add another File Output Type
 
 We've just done markdown to PDF, but Pandoc can convert to a variety of different formats. Try
 adding a line to your `build-job-pandoc` job to also convert the markdown file into a different

@@ -70,6 +70,7 @@ episodes:
 - 02-understanding-the-cicd-file.md
 - 03-build-and-deploy.md
 - 04-pandoc.md
+- 05-custom-templates.md
 
 # Information for Learners
 learners:
